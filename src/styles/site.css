@@ -89,7 +89,15 @@ h3 { font-size: 1.5rem; }
 .card h3 a:hover { text-decoration: underline; }
 .card p { margin: 0; font-size: 0.95rem; }
 .card .player { width: 100%; margin: 6px 0 0; }
-@media (max-width: 700px) { .card { grid-template-columns: 1fr; } .card-img img { max-width: 220px; } }
+/* Home page version: grey panel, bold serif title, justified summary */
+.card-home { background: #e8e8e8; border-radius: 30px; padding: 30px; grid-template-columns: 240px 1fr; gap: 48px; }
+.card-home .card-img img { border-radius: 24px; }
+.card-home .card-body { gap: 14px; }
+.card-home .num { font: 700 clamp(1.5rem, 3vw, 1.9rem)/1.2 var(--heading); }
+.card-home h3 { font: 700 clamp(1.5rem, 3vw, 2rem)/1.4 var(--heading); margin: 0; }
+.card-home p:not(.num):not(.flag) { font-size: 1.125rem; color: var(--muted); text-align: justify; }
+.card-home .button { margin-top: 10px; padding: 14px 22px; }
+@media (max-width: 700px) { .card { grid-template-columns: 1fr; } .card-img img { max-width: 220px; } .card-home { grid-template-columns: 1fr; gap: 20px; } }
 .flag { background: #fff3cd; color: #5c4400; border-left: 4px solid #e0a800; padding: 8px 12px; border-radius: 4px; font-size: 0.9rem; }
 
 .article { padding-block: 3rem 5rem; max-width: 800px; }
@@ -128,5 +136,5 @@ figcaption { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
 .foot-title { font: 400 1.5rem var(--heading); color: var(--ink); margin: 0 0 8px; }
 .social { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 0; margin: 0; }
 .social a { color: var(--ink); font-weight: 600; }
-.site-footer img { width: 160px; }
+.site-footer img { width: 260px; height: auto; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

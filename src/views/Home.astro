@@ -40,7 +40,7 @@ const latest = getEpisodes().slice(0, 3);
     <h2>{t.episodesTitle}</h2>
     <p class="lead">{pick(p, 'episodesIntro', lang)}</p>
     <div class="cards">
-      {latest.map((ep) => <EpisodeCard ep={ep} lang={lang} />)}
+      {latest.map((ep) => <EpisodeCard ep={ep} lang={lang} player={false} variant="home" />)}
     </div>
     <a class="button" href={localePath(lang, 'episodes')}>{t.seeAll}</a>
   </section>

@@ -1,14 +1,14 @@
 ---
-import { ui, localePath, type Lang } from '../i18n/ui';
+import { ui, localePath, podcastCover, type Lang } from '../i18n/ui';
 import { pick, needsTranslation, type Episode } from '../lib/content';
-const { ep, lang, cta = 'seeEpisode', player = true } = Astro.props as { ep: Episode; lang: Lang; cta?: 'seeEpisode' | 'readArticle'; player?: boolean };
+const { ep, lang, cta = 'seeEpisode', player = true, variant = 'list' } = Astro.props as { ep: Episode; lang: Lang; cta?: 'seeEpisode' | 'readArticle'; player?: boolean; variant?: 'list' | 'home' };
 const t = ui[lang];
 const href = localePath(lang, `episode/${ep.slug}`);
 const title = pick(ep, 'title', lang);
 ---
 
-<article class="card">
-  <a href={href} class="card-img" tabindex="-1" aria-hidden="true"><img src={ep.coverImage} alt="" loading="lazy" /></a>
+<article class:list={['card', variant === 'home' && 'card-home']}>
+  <a href={href} class="card-img" tabindex="-1" aria-hidden="true"><img src={podcastCover} alt="" loading="lazy" /></a>
   <div class="card-body">
     <p class="num">{ep.label}</p>
     <h3><a href={href}>{title}</a></h3>

@@ -97,6 +97,8 @@ export const social = [
   { name: 'TikTok', url: 'https://www.tiktok.com/@howtheydiditseries' },
   { name: 'Apple Podcasts', url: 'https://podcasts.apple.com/us/podcast/how-they-did-it/id1840292633' },
 ];
+// Square podcast artwork shown on every episode card (episode pages use that episode's own photo).
+export const podcastCover = '/images/site/podcast-cover.jpg';
 export const contactEmail = 'howtheydidit@gmail.com';
 // Free key from web3forms.com (public by design). Messages are emailed to the address you register there.
 export const web3formsKey = '';
