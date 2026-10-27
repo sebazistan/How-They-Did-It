@@ -96,6 +96,10 @@ export default config({
         contactHeadingFr: fields.text({ label: 'Contact - titre (FR)' }),
         contactIntroEn: fields.text({ label: 'Contact intro (EN)', multiline: true }),
         contactIntroFr: fields.text({ label: 'Contact - intro (FR)', multiline: true }),
+        contactDetailsHeadingEn: fields.text({ label: 'Contact - "Get in touch" heading (EN)' }),
+        contactDetailsHeadingFr: fields.text({ label: 'Contact - « Écrivez-nous » titre (FR)' }),
+        contactDetailsEn: fields.text({ label: 'Contact - "Get in touch" text (EN)', multiline: true }),
+        contactDetailsFr: fields.text({ label: 'Contact - « Écrivez-nous » texte (FR)', multiline: true }),
       },
     }),
     team: singleton({

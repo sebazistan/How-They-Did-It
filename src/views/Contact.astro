@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { ui, social, contactEmail, web3formsKey, siteName, type Lang } from '../i18n/ui';
-import { pages, pick } from '../lib/content';
+import { pages, pick, markdown } from '../lib/content';
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
 const p = pages();
@@ -10,20 +10,25 @@ const intro = pick(p, 'contactIntro', lang);
 ---
 
 <Base lang={lang} path="contact" title={title} description={intro}>
-  <section class="wrap block narrow">
-    <h1>{title}</h1>
+  <section class="wrap block">
+    <h1 class="page-title">{title}</h1>
     <p class="lead">{intro}</p>
-    <form id="contact-form" class="form" data-key={web3formsKey} data-email={contactEmail} data-sending={t.sending} data-sent={t.sent} data-failed={t.failed} data-subject={`${siteName} (${lang})`}>
-      <label>{t.name}<input name="name" required autocomplete="name" /></label>
-      <label>{t.email}<input name="email" type="email" required autocomplete="email" /></label>
-      <label>{t.message}<textarea name="message" rows="6" required></textarea></label>
-      <input type="text" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
-      <button class="button dark" type="submit">{t.send}</button>
-      <p id="form-status" role="status"></p>
-    </form>
-    <p>
-      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-    </p>
+    <div class="contact-grid">
+      <img class="contact-img" src="/images/site/contact.jpg" alt="" loading="lazy" />
+      <form id="contact-form" class="form" data-key={web3formsKey} data-email={contactEmail} data-sending={t.sending} data-sent={t.sent} data-failed={t.failed} data-subject={`${siteName} (${lang})`}>
+        <input name="name" required autocomplete="name" placeholder={t.name} aria-label={t.name} />
+        <input name="email" type="email" required autocomplete="email" placeholder={t.email} aria-label={t.email} />
+        <textarea name="message" rows="6" required placeholder={t.message} aria-label={t.message}></textarea>
+        <input type="text" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+        <button class="button send" type="submit">{t.send}</button>
+        <p id="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+  <section class="wrap block">
+    <h2>{pick(p, 'contactDetailsHeading', lang)}</h2>
+    <div class="prose" set:html={markdown(pick(p, 'contactDetails', lang))} />
+    <p class="email-big"><a href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
     <ul class="social">
       {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
     </ul>

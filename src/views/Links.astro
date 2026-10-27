@@ -8,15 +8,14 @@ const t = ui[lang];
 
 <Base lang={lang} path="links" title={t.resourcesTitle}>
   <section class="wrap block">
-    <h1>{t.resourcesTitle}</h1>
-    <ul class="links">
+    <div class="stack">
       {links().map((l) => (
-        <li>
-          <h3>{l.name}</h3>
+        <article class="entry">
+          <h2>{l.name}</h2>
           <p>{pick(l, 'desc', lang)}</p>
-          <a class="button dark" href={l.url} rel="noopener" target="_blank">{t.visit}</a>
-        </li>
+          <a class="button" href={l.url} rel="noopener" target="_blank">{t.clickHere}</a>
+        </article>
       ))}
-    </ul>
+    </div>
   </section>
 </Base>

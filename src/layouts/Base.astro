@@ -26,6 +26,14 @@ const nav = [
   ['about-us', t.about],
   ['contact', t.contact],
 ] as const;
+// The original site shows this shorter menu on desktop and the full list in the phone menu.
+const navDesktop = [
+  ['about-us', t.aboutUs],
+  ['episodes', t.episodes],
+  ['text-interviews', t.articles],
+  ['links', t.resources],
+  ['contact', t.contact],
+] as const;
 const current = path.split('/')[0];
 const fullTitle = path === '' ? siteName : `${title} | ${siteName}`;
 ---
@@ -61,17 +69,30 @@ const fullTitle = path === '' ? siteName : `${title} | ${siteName}`;
         </a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">☰</button>
         <nav aria-label="Main" id="main-nav">
-          <ul>
+          <ul class="nav-desktop">
+            {navDesktop.map(([p, label]) => (
+              <li>
+                <a href={localePath(lang, p)} aria-current={current === p ? 'page' : undefined}>{label}</a>
+              </li>
+            ))}
+            <li class="lang">
+              <details class="lang-menu">
+                <summary>{t.language}</summary>
+                <ul>
+                  <li><a href={localePath('en', path)} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>English</a></li>
+                  <li><a href={localePath('fr', path)} hreflang="fr-CA" lang="fr-CA" aria-current={lang === 'fr' ? 'true' : undefined}>Français</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+          <ul class="nav-mobile">
             {nav.map(([p, label]) => (
               <li>
                 <a href={localePath(lang, p)} aria-current={(p === '' ? path === '' : current === p) ? 'page' : undefined}>{label}</a>
               </li>
             ))}
-            <li class="lang">
-              <a href={localePath(other, path)} hreflang={other === 'fr' ? 'fr-CA' : 'en'} lang={other === 'fr' ? 'fr-CA' : 'en'} class="lang-toggle">
-                {other === 'fr' ? 'Français' : 'English'}
-              </a>
-            </li>
+            <li><a href={localePath('en', path)} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>English</a></li>
+            <li><a href={localePath('fr', path)} hreflang="fr-CA" lang="fr-CA" aria-current={lang === 'fr' ? 'true' : undefined}>Français</a></li>
           </ul>
         </nav>
       </div>

@@ -13,7 +13,7 @@ const credit = pick(ep, 'photoCredit', lang);
   <article class="wrap article">
     <a class="back" href={localePath(lang, 'episodes')}>{t.allEpisodes}</a>
     {needsTranslation(ep, lang) && <p class="flag" role="note">{t.needsTranslation}</p>}
-    <figure>
+    <figure class="credit-box">
       <img src={ep.coverImage} alt="" />
       {credit && <figcaption>{credit}</figcaption>}
     </figure>

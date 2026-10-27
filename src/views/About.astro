@@ -9,24 +9,23 @@ const intro = pick(pages(), 'aboutIntro', lang);
 
 <Base lang={lang} path="about-us" title={t.aboutTitle} description={intro.split('\n')[0]}>
   <section class="wrap block">
-    <h1>{t.aboutTitle}</h1>
-    <div class="prose" set:html={markdown(intro)} />
+    <h1 class="page-title">{t.aboutTitle}</h1>
+    <div class="prose justify" set:html={markdown(intro)} />
+    <img class="michener-inline" src="/images/site/michener.png" alt="The Michener Awards / Les Prix Michener" width="260" height="136" loading="lazy" />
   </section>
-  <section class="band">
-    <div class="wrap block">
-      <h2>{t.hosts}</h2>
-      <div class="people">
-        {team().map((m) => (
-          <article class="person">
-            <img src={m.photo} alt={m.name} loading="lazy" />
-            <div>
-              <h3>{m.name}</h3>
-              <p class="meta">{pick(m, 'role', lang)}</p>
-              <div class="prose" set:html={markdown(pick(m, 'bio', lang))} />
-            </div>
-          </article>
-        ))}
-      </div>
+  <section class="wrap block">
+    <h2>{t.hosts}</h2>
+    <div class="people">
+      {team().map((m) => (
+        <article class="person">
+          <img src={m.photo} alt={m.name} loading="lazy" />
+          <div>
+            <h3>{m.name}</h3>
+            <p class="role">{pick(m, 'role', lang)}</p>
+            <div class="prose justify" set:html={markdown(pick(m, 'bio', lang))} />
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 </Base>
