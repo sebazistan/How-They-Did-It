@@ -1,0 +1,58 @@
+{
+  "links": [
+    {
+      "name": "J-Source",
+      "descEn": "J-Source.ca is produced by a collaboration of post-secondary journalism programs in Canada, aiming to promote national discussion about journalism and journalism education as well as to provide a source for news, research, commentary, advice and resources for industry professionals, academics, journalism and media students.",
+      "descFr": "J-Source est une plateforme canadienne issue d’un partenariat entre des programmes de journalisme postsecondaires. Elle contribue au débat national sur le journalisme et sa formation, tout en offrant des contenus, analyses et ressources destinés aux professionnelles et professionnels de l’information, au milieu universitaire ainsi qu’aux étudiantes et étudiants en journalisme et en médias.",
+      "url": "https://j-source.ca/"
+    },
+    {
+      "name": "Fédération professionnelle des journalistes du Québec | FPJQ",
+      "descEn": "Depuis 1969, la Fédération professionnelle des journalistes du Québec défend la liberté de la presse et le droit du public à l’information. Adhérer à la FPJQ, c'est faire partie d'une communauté journalistique et obtenir une carte de presse reconnue partout.",
+      "descFr": "Fondée en 1969, la FPJQ défend la liberté de la presse et le droit du public à une information de qualité. Elle rassemble les journalistes du Québec et leur offre un cadre professionnel reconnu, notamment par la délivrance de la carte de presse.",
+      "url": "https://www.fpjq.org/fr/"
+    },
+    {
+      "name": "IJNet",
+      "descEn": "Produced by the International Center for Journalists, IJNet delivers the latest on global media innovation, news apps and tools, training opportunities and expert advice for professional and emerging journalists worldwide.",
+      "descFr": "IJNet, une initiative de l’International Center for Journalists, informe les journalistes du monde entier sur les innovations médiatiques, les outils numériques, les possibilités de formation et les meilleures pratiques du métier.",
+      "url": "https://ijnet.org/en"
+    },
+    {
+      "name": "Accueil - Conseil de presse du Québec",
+      "descEn": "Le Conseil de presse du Québec est un organisme privé, à but non lucratif, qui œuvre à la protection de la liberté de la presse et à la défense du droit du public à une information de qualité.",
+      "descFr": "Le Conseil de presse du Québec est un organisme indépendant à but non lucratif qui veille au respect de la liberté de la presse et au droit du public à une information responsable, rigoureuse et de qualité.",
+      "url": "https://conseildepresse.qc.ca/"
+    },
+    {
+      "name": "Canadian Association of Journalists",
+      "descEn": "The CAJ promotes excellence in journalism, encouraging investigative journalism.It serves as the national voice of Canadian journalists, and upholds the public’s right to know.",
+      "descFr": "L’Association canadienne des journalistes œuvre à la promotion de l’excellence journalistique, notamment en soutenant le journalisme d’enquête. Elle agit comme porte-parole national des journalistes canadiens et défend le droit du public à l’information.",
+      "url": "https://caj.ca/"
+    },
+    {
+      "name": "Radio Television Digital News Association",
+      "descEn": "RTDNA Canada is a progressive organization offering a forum for open discussion, educational information and action in the news industry. The Association speaks for the leaders and members of Canada’s radio, television and digital news operations on the issues that impact news coverage and journalists. RTDNA Canada fosters education, career development, national and regional awards recognition, and an active dialogue with the membership.",
+      "descFr": "RTDNA Canada rassemble les professionnelles et professionnels des médias radio, télévisés et numériques afin de favoriser le dialogue, la formation et l’évolution des pratiques journalistiques. L’organisation soutient le développement de carrière, la reconnaissance par des prix et la réflexion collective sur les enjeux de l’information.",
+      "url": "https://rtdnacanada.com/"
+    },
+    {
+      "name": "SABEW",
+      "descEn": "A group of Canadian journalists launched the Society for Advancing Business Editing and Writing (SABEW) Canada, SABEW’s first international chapter, in 2014. It now has more than 250 members, among them reporters and editors from The Globe and Mail, Bloomberg, Financial Post, The Canadian Press, the Canadian Broadcasting Corporation, The Logic and more. SABEW Canada’s mission is to define and inspire excellence in business journalism, including by hosting educational events, training sessions and networking events where business journalists can make new connections and be part of a community of colleagues and friends. SABEW Canada also hosts its prestigious Best in Business Awards competition.",
+      "descFr": "SABEW Canada est un réseau de journalistes spécialisés en économie et en affaires, voué à l’excellence du journalisme économique. L’organisation favorise le partage des connaissances, la formation continue, le réseautage et la reconnaissance du travail journalistique par l’entremise de ses prix Best in Business.",
+      "url": "https://sabew.org/sabew-canada/"
+    },
+    {
+      "name": "Pulitzer Center",
+      "descEn": "The Pulitzer Center champions the power of stories to make complex issues relevant and inspire action.",
+      "descFr": "Le Pulitzer Center appuie le journalisme de fond en misant sur la force du récit pour éclairer des enjeux complexes et stimuler la réflexion et l’engagement du public.",
+      "url": "https://pulitzercenter.org/"
+    },
+    {
+      "name": "SEJ",
+      "descEn": "The Society of Environmental Journalists is the only North American membership association of professional journalists dedicated to more and better coverage of environment-related issues. SEJ’s mission is to strengthen the quality, reach and viability of journalism that advances public understanding of environmental issues.",
+      "descFr": "La Society of Environmental Journalists est une association nord-américaine dédiée à l’amélioration de la couverture journalistique des enjeux environnementaux. Elle soutient ses membres afin de renforcer la qualité, la portée et la viabilité de ce champ de pratique essentiel à l’intérêt public.",
+      "url": "https://www.sej.org/"
+    }
+  ]
+}

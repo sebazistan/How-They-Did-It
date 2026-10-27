@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { pages, team, pick, markdown } from '../lib/content';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const intro = pick(pages(), 'aboutIntro', lang);
+---
+
+<Base lang={lang} path="about-us" title={t.aboutTitle} description={intro.split('\n')[0]}>
+  <section class="wrap block">
+    <h1>{t.aboutTitle}</h1>
+    <div class="prose" set:html={markdown(intro)} />
+  </section>
+  <section class="band">
+    <div class="wrap block">
+      <h2>{t.hosts}</h2>
+      <div class="people">
+        {team().map((m) => (
+          <article class="person">
+            <img src={m.photo} alt={m.name} loading="lazy" />
+            <div>
+              <h3>{m.name}</h3>
+              <p class="meta">{pick(m, 'role', lang)}</p>
+              <div class="prose" set:html={markdown(pick(m, 'bio', lang))} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

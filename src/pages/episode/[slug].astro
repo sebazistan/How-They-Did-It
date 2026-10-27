@@ -1,0 +1,9 @@
+---
+import EpisodePage from '../../views/EpisodePage.astro';
+import { getEpisodes } from '../../lib/content';
+export function getStaticPaths() {
+  return getEpisodes().map((ep) => ({ params: { slug: ep.slug }, props: { ep } }));
+}
+const { ep } = Astro.props;
+---
+<EpisodePage lang="en" ep={ep} />

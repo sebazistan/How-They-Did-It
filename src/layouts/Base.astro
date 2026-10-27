@@ -1,0 +1,93 @@
+---
+import '../styles/site.css';
+import { ui, siteName, social, localePath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** English path without leading slash, e.g. 'episodes' or 'episode/episode-3'. '' = home. */
+  path: string;
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+const { lang, path, title, description = '', image = '/images/site/banner.jpg', noindex = false } = Astro.props;
+const t = ui[lang];
+const site = 'https://www.canadianinvestigativejournalism.ca';
+const other: Lang = lang === 'en' ? 'fr' : 'en';
+const enUrl = site + localePath('en', path);
+const frUrl = site + localePath('fr', path);
+const canonical = lang === 'en' ? enUrl : frUrl;
+const nav = [
+  ['', t.home],
+  ['episodes', t.episodes],
+  ['text-interviews', t.interviews],
+  ['videos', t.videos],
+  ['about-us', t.about],
+  ['contact', t.contact],
+] as const;
+const current = path.split('/')[0];
+const fullTitle = path === '' ? siteName : `${title} | ${siteName}`;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="fr-CA" href={frUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={site + image} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_CA' : 'en_CA'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">{t.skip}</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href={localePath(lang)}>
+          <img src="/images/site/logo-white.svg" alt={siteName} height="40" />
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {nav.map(([p, label]) => (
+              <li>
+                <a href={localePath(lang, p)} aria-current={(p === '' ? path === '' : current === p) ? 'page' : undefined}>{label}</a>
+              </li>
+            ))}
+            <li class="lang">
+              <a href={localePath(other, path)} hreflang={other === 'fr' ? 'fr-CA' : 'en'} lang={other === 'fr' ? 'fr-CA' : 'en'} class="lang-toggle">
+                {other === 'fr' ? 'Français' : 'English'}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <p class="foot-title">{t.follow}</p>
+          <ul class="social">
+            {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
+          </ul>
+        </div>
+        <img src="/images/site/michener.jpg" alt="Michener Awards" width="160" loading="lazy" />
+      </div>
+    </footer>
+  </body>
+</html>

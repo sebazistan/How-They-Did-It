@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, social, contactEmail, web3formsKey, siteName, type Lang } from '../i18n/ui';
+import { pages, pick } from '../lib/content';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const p = pages();
+const title = lang === 'fr' ? p.contactHeadingFr || t.contactTitle : t.contactTitle;
+const intro = pick(p, 'contactIntro', lang);
+---
+
+<Base lang={lang} path="contact" title={title} description={intro}>
+  <section class="wrap block narrow">
+    <h1>{title}</h1>
+    <p class="lead">{intro}</p>
+    <form id="contact-form" class="form" data-key={web3formsKey} data-email={contactEmail} data-sending={t.sending} data-sent={t.sent} data-failed={t.failed} data-subject={`${siteName} (${lang})`}>
+      <label>{t.name}<input name="name" required autocomplete="name" /></label>
+      <label>{t.email}<input name="email" type="email" required autocomplete="email" /></label>
+      <label>{t.message}<textarea name="message" rows="6" required></textarea></label>
+      <input type="text" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+      <button class="button dark" type="submit">{t.send}</button>
+      <p id="form-status" role="status"></p>
+    </form>
+    <p>
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </p>
+    <ul class="social">
+      {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
+    </ul>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status')!;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const d = form.dataset;
+    const fd = new FormData(form);
+    // No form key yet: open the visitor's email app instead of failing silently.
+    if (!d.key) {
+      const body = encodeURIComponent(`${fd.get('message')}\n\n${fd.get('name')} <${fd.get('email')}>`);
+      location.href = `mailto:${d.email}?subject=${encodeURIComponent(d.subject!)}&body=${body}`;
+      return;
+    }
+    fd.append('access_key', d.key);
+    fd.append('subject', d.subject!);
+    status.textContent = d.sending!;
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: fd });
+      const j = await r.json();
+      if (j.success) { status.textContent = d.sent!; form.reset(); } else throw new Error('rejected');
+    } catch {
+      status.textContent = d.failed!;
+    }
+  });
+</script>

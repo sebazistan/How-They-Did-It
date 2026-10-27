@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, localePath, type Lang } from '../i18n/ui';
+import { getEpisodes, pages, pick, youtubeId } from '../lib/content';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const title = lang === 'fr' ? pages().videosTitleFr || t.videosTitle : t.videosTitle;
+const withVideo = getEpisodes().filter((e) => youtubeId(e.youtubeUrl));
+---
+
+<Base lang={lang} path="videos" title={title}>
+  <section class="wrap block">
+    <h1>{title}</h1>
+    <div class="cards">
+      {withVideo.map((ep) => (
+        <article class="card">
+          <div class="video">
+            <iframe title={pick(ep, 'title', lang)} src={`https://www.youtube-nocookie.com/embed/${youtubeId(ep.youtubeUrl)}`} loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="card-body">
+            <h3><a href={localePath(lang, `episode/${ep.slug}`)}>{pick(ep, 'title', lang)}</a></h3>
+            <p>{pick(ep, 'summary', lang)}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

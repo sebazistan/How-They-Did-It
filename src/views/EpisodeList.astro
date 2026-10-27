@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import EpisodeCard from './EpisodeCard.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { getEpisodes, pages, pick } from '../lib/content';
+// kind: the "Episodes" page or the "Interviews / Articles" page (same content, two entrances, as on the old site).
+const { lang, kind } = Astro.props as { lang: Lang; kind: 'episodes' | 'interviews' };
+const t = ui[lang];
+const p = pages();
+const title = kind === 'episodes' ? t.episodesTitle : lang === 'fr' ? p.interviewsTitleFr || t.interviewsTitle : t.interviewsTitle;
+const intro = pick(p, kind === 'episodes' ? 'episodesIntro' : 'interviewsIntro', lang);
+---
+
+<Base lang={lang} path={kind === 'episodes' ? 'episodes' : 'text-interviews'} title={title} description={intro}>
+  <section class="wrap block">
+    <h1>{title}</h1>
+    <p class="lead">{intro}</p>
+    <div class="cards">
+      {getEpisodes().map((ep) => <EpisodeCard ep={ep} lang={lang} cta={kind === 'episodes' ? 'seeEpisode' : 'readArticle'} />)}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import EpisodeCard from './EpisodeCard.astro';
+import { ui, localePath, siteName, type Lang } from '../i18n/ui';
+import { getEpisodes, pages, team, pick } from '../lib/content';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const p = pages();
+const latest = getEpisodes().slice(0, 3);
+---
+
+<Base lang={lang} path="" title={siteName} description={pick(p, 'homeAbout', lang)}>
+  <section class="hero" style="background-image:url(/images/site/banner.jpg)">
+    <div class="wrap">
+      <h1>{siteName}</h1>
+      <a class="button" href={localePath(lang, 'episodes')}>{t.startListening}</a>
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <h2>{t.aboutTitle}</h2>
+    <p class="lead">{pick(p, 'homeAbout', lang)}</p>
+    <a class="button dark" href={localePath(lang, 'about-us')}>{t.readMore}</a>
+  </section>
+
+  <section class="band">
+    <div class="wrap block">
+      <h2>{pick(p, 'teamHeading', lang)}</h2>
+      <p class="lead">{pick(p, 'teamIntro', lang)}</p>
+      <ul class="team-grid">
+        {team().map((m) => (
+          <li>
+            <img src={m.photo} alt={m.name} loading="lazy" />
+            <strong>{m.name}</strong>
+            <span>{pick(m, 'role', lang).split('\n')[0]}</span>
+          </li>
+        ))}
+      </ul>
+      <a class="button dark" href={localePath(lang, 'about-us')}>{t.readMore}</a>
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <h2>{t.episodesTitle}</h2>
+    <p class="lead">{pick(p, 'episodesIntro', lang)}</p>
+    <div class="cards">
+      {latest.map((ep) => <EpisodeCard ep={ep} lang={lang} />)}
+    </div>
+    <a class="button dark" href={localePath(lang, 'episodes')}>{t.seeAll}</a>
+  </section>
+</Base>

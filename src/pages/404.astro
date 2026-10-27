@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../i18n/ui';
+const t = ui.en;
+const fr = ui.fr;
+---
+<Base lang="en" path="" title={t.notFoundTitle} noindex>
+  <section class="wrap block narrow">
+    <h1>{t.notFoundTitle}</h1>
+    <p>{t.notFoundText} <a href="/">{t.backHome}</a></p>
+    <h2 lang="fr-CA">{fr.notFoundTitle}</h2>
+    <p lang="fr-CA">{fr.notFoundText} <a href="/fr-ca">{fr.backHome}</a></p>
+  </section>
+</Base>

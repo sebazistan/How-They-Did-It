@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, localePath, type Lang } from '../i18n/ui';
+import { pick, markdown, formatDate, needsTranslation, youtubeId, type Episode } from '../lib/content';
+const { lang, ep } = Astro.props as { lang: Lang; ep: Episode };
+const t = ui[lang];
+const yt = youtubeId(ep.youtubeUrl);
+const title = pick(ep, 'title', lang);
+const credit = pick(ep, 'photoCredit', lang);
+---
+
+<Base lang={lang} path={`episode/${ep.slug}`} title={title} description={pick(ep, 'summary', lang)} image={ep.coverImage}>
+  <article class="wrap article">
+    <a class="back" href={localePath(lang, 'episodes')}>{t.allEpisodes}</a>
+    {needsTranslation(ep, lang) && <p class="flag" role="note">{t.needsTranslation}</p>}
+    <figure>
+      <img src={ep.coverImage} alt="" />
+      {credit && <figcaption>{credit}</figcaption>}
+    </figure>
+    <h1>{title}</h1>
+    <p class="lead">{pick(ep, 'summary', lang)}</p>
+    <p class="meta">
+      {ep.byline && <>{t.by} {ep.byline} · </>}{formatDate(ep.publishedOn, lang)}
+    </p>
+    {ep.soundcloudUrl && (
+      <iframe class="player" title={`${title} (audio)`} width="100%" height="166" scrolling="no" frameborder="0" allow="autoplay" loading="lazy" src={ep.soundcloudUrl}></iframe>
+    )}
+    {yt && (
+      <div class="video">
+        <iframe title={`${title} (video)`} src={`https://www.youtube-nocookie.com/embed/${yt}`} loading="lazy" allowfullscreen></iframe>
+      </div>
+    )}
+    <div class="prose" set:html={markdown(pick(ep, 'body', lang))} />
+  </article>
+</Base>

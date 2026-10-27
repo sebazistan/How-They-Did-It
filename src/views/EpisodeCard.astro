@@ -1,0 +1,18 @@
+---
+import { ui, localePath, type Lang } from '../i18n/ui';
+import { pick, formatDate, needsTranslation, type Episode } from '../lib/content';
+const { ep, lang, cta = 'seeEpisode' } = Astro.props as { ep: Episode; lang: Lang; cta?: 'seeEpisode' | 'readArticle' };
+const t = ui[lang];
+const href = localePath(lang, `episode/${ep.slug}`);
+---
+
+<article class="card">
+  <a href={href} class="card-img"><img src={ep.coverImage} alt="" loading="lazy" /></a>
+  <div class="card-body">
+    <p class="meta">{ep.label} · {formatDate(ep.publishedOn, lang)}</p>
+    <h3><a href={href}>{pick(ep, 'title', lang)}</a></h3>
+    {needsTranslation(ep, lang) && <p class="flag">{t.needsTranslation}</p>}
+    <p>{pick(ep, 'summary', lang)}</p>
+    <a class="button dark" href={href}>{t[cta]}</a>
+  </div>
+</article>
