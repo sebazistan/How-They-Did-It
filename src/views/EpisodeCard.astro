@@ -1,18 +1,22 @@
 ---
 import { ui, localePath, type Lang } from '../i18n/ui';
-import { pick, formatDate, needsTranslation, type Episode } from '../lib/content';
-const { ep, lang, cta = 'seeEpisode' } = Astro.props as { ep: Episode; lang: Lang; cta?: 'seeEpisode' | 'readArticle' };
+import { pick, needsTranslation, type Episode } from '../lib/content';
+const { ep, lang, cta = 'seeEpisode', player = true } = Astro.props as { ep: Episode; lang: Lang; cta?: 'seeEpisode' | 'readArticle'; player?: boolean };
 const t = ui[lang];
 const href = localePath(lang, `episode/${ep.slug}`);
+const title = pick(ep, 'title', lang);
 ---
 
 <article class="card">
-  <a href={href} class="card-img"><img src={ep.coverImage} alt="" loading="lazy" /></a>
+  <a href={href} class="card-img" tabindex="-1" aria-hidden="true"><img src={ep.coverImage} alt="" loading="lazy" /></a>
   <div class="card-body">
-    <p class="meta">{ep.label} · {formatDate(ep.publishedOn, lang)}</p>
-    <h3><a href={href}>{pick(ep, 'title', lang)}</a></h3>
+    <p class="num">{ep.label}</p>
+    <h3><a href={href}>{title}</a></h3>
     {needsTranslation(ep, lang) && <p class="flag">{t.needsTranslation}</p>}
     <p>{pick(ep, 'summary', lang)}</p>
-    <a class="button dark" href={href}>{t[cta]}</a>
+    {player && ep.soundcloudUrl && (
+      <iframe class="player" title={`${title} (audio)`} height="166" scrolling="no" frameborder="0" loading="lazy" src={ep.soundcloudUrl}></iframe>
+    )}
+    <a class="button" href={href}>{t[cta]}</a>
   </div>
 </article>

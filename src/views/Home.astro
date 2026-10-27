@@ -10,34 +10,30 @@ const latest = getEpisodes().slice(0, 3);
 ---
 
 <Base lang={lang} path="" title={siteName} description={pick(p, 'homeAbout', lang)}>
-  <section class="hero" style="background-image:url(/images/site/banner.jpg)">
-    <div class="wrap">
-      <h1>{siteName}</h1>
-      <a class="button" href={localePath(lang, 'episodes')}>{t.startListening}</a>
-    </div>
+  <section class="hero-title wrap">
+    <h1>{siteName}</h1>
+    <a class="button" href={localePath(lang, 'episodes')}>{t.startListening}</a>
   </section>
 
   <section class="wrap block">
     <h2>{t.aboutTitle}</h2>
-    <p class="lead">{pick(p, 'homeAbout', lang)}</p>
-    <a class="button dark" href={localePath(lang, 'about-us')}>{t.readMore}</a>
+    <p class="lead justify">{pick(p, 'homeAbout', lang)}</p>
+    <a class="button" href={localePath(lang, 'about-us')}>{t.readMore}</a>
   </section>
 
-  <section class="band">
-    <div class="wrap block">
-      <h2>{pick(p, 'teamHeading', lang)}</h2>
-      <p class="lead">{pick(p, 'teamIntro', lang)}</p>
-      <ul class="team-grid">
-        {team().map((m) => (
-          <li>
-            <img src={m.photo} alt={m.name} loading="lazy" />
-            <strong>{m.name}</strong>
-            <span>{pick(m, 'role', lang).split('\n')[0]}</span>
-          </li>
-        ))}
-      </ul>
-      <a class="button dark" href={localePath(lang, 'about-us')}>{t.readMore}</a>
-    </div>
+  <section class="wrap block">
+    <h2>{pick(p, 'teamHeading', lang)}</h2>
+    <p class="lead">{pick(p, 'teamIntro', lang)}</p>
+    <ul class="team-grid">
+      {team().map((m) => (
+        <li>
+          <img src={m.photo} alt={m.name} loading="lazy" />
+          <strong>{m.name}</strong>
+          <span>{pick(m, 'role', lang).split('\n')[0]}</span>
+        </li>
+      ))}
+    </ul>
+    <a class="button" href={localePath(lang, 'about-us')}>{t.readMore}</a>
   </section>
 
   <section class="wrap block">
@@ -46,6 +42,6 @@ const latest = getEpisodes().slice(0, 3);
     <div class="cards">
       {latest.map((ep) => <EpisodeCard ep={ep} lang={lang} />)}
     </div>
-    <a class="button dark" href={localePath(lang, 'episodes')}>{t.seeAll}</a>
+    <a class="button" href={localePath(lang, 'episodes')}>{t.seeAll}</a>
   </section>
 </Base>
