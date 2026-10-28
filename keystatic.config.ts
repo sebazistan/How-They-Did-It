@@ -4,10 +4,11 @@ const note =
   'Plain text. Leave a blank line between paragraphs. Optional: **bold**, *italic*, [link text](https://address), "## Heading", and "- " for bullet lists.';
 
 export default config({
-  // On the live site the editor saves straight to GitHub. On your own computer (npm run dev) it saves to local files.
-  storage: import.meta.env.PROD
-    ? { kind: 'github', repo: { owner: 'sebazistan', name: 'How-They-Did-It' } }
-    : { kind: 'local' },
+  // On the live site the editor saves to GitHub through Keystatic Cloud (free account at keystatic.cloud).
+  // On your own computer (npm run dev) it saves to local files.
+  storage: import.meta.env?.PROD ? { kind: 'cloud' } : { kind: 'local' },
+  // TODO: replace with the project key shown in keystatic.cloud (format: team/project).
+  cloud: { project: 'REPLACE-TEAM/REPLACE-PROJECT' },
   ui: { brand: { name: 'How They Did It' } },
   collections: {
     episodes: collection({

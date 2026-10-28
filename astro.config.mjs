@@ -11,7 +11,8 @@ const isDev = process.argv.includes('dev');
 export default defineConfig({
   site: 'https://www.canadianinvestigativejournalism.ca',
   output: 'static',
-  adapter: isDev ? undefined : cloudflare(),
+  // imageService passthrough: the site has no on-the-fly image processing, so no Cloudflare Images binding is needed.
+  adapter: isDev ? undefined : cloudflare({ imageService: 'passthrough' }),
   trailingSlash: 'never',
   build: { format: 'file' },
   integrations: [
