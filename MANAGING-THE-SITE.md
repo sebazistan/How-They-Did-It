@@ -10,7 +10,7 @@
 Article text is plain text: leave a blank line between paragraphs.
 
 ## One-time setup (owner)
-- **Keystatic Cloud (browser editor).** Create a free account at https://keystatic.cloud, then a team and a project connected to the GitHub repo (branch `main`). Set the project's **Primary URL** to `https://www.canadianinvestigativejournalism.ca`, or sign-in is refused. Copy the project key (format `team/project`) into `cloud.project` in `keystatic.config.ts`. Free plan: up to 3 users per team. There are no roles: anyone invited can edit everything.
+- **Keystatic Cloud (browser editor).** Create a free account at https://keystatic.cloud, then a team and a project connected to the GitHub repo (branch `main`). Set the project's **Primary URL** to `https://www.canadianinvestigativejournalism.ca`, or sign-in is refused. The project key (`huzzah/how-they-did-it`) is already set in `cloud.project` in `keystatic.config.ts`. Free plan: up to 3 users per team. There are no roles: anyone invited can edit everything.
 - **Contact form.** Create a free form at web3forms.com and paste its access key into `web3formsKey` in `src/i18n/ui.ts`. Until then the form opens the visitor's email app.
 
 ## Still to do

@@ -7,8 +7,8 @@ export default config({
   // On the live site the editor saves to GitHub through Keystatic Cloud (free account at keystatic.cloud).
   // On your own computer (npm run dev) it saves to local files.
   storage: import.meta.env?.PROD ? { kind: 'cloud' } : { kind: 'local' },
-  // TODO: replace with the project key shown in keystatic.cloud (format: team/project).
-  cloud: { project: 'REPLACE-TEAM/REPLACE-PROJECT' },
+  // Project key from keystatic.cloud (format: team/project).
+  cloud: { project: 'huzzah/how-they-did-it' },
   ui: { brand: { name: 'How They Did It' } },
   collections: {
     episodes: collection({
