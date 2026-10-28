@@ -19,3 +19,28 @@ Article text is plain text: leave a blank line between paragraphs.
 
 ## On your own computer
 `npm install`, then `npm run dev` and open http://localhost:4321/keystatic. `npm run build` runs the safety check first, so a broken edit never goes live.
+
+## Writing article text (the box rules)
+- Leave a blank line between paragraphs.
+- `**like this**` makes bold text, `*like this*` makes italics, `[words](https://address)` makes a link.
+- Leave `**` pairs alone unless the text between them should be bold. A lone `**` shows up on the page as two asterisks.
+- Stay on the **main** branch in the editor. The "New branch" button makes a private copy that does not appear on the site.
+- A save takes about two minutes to appear on the site.
+
+## Translations
+Each episode has an ENGLISH set of boxes and a FRANÇAIS set. While one language still holds the other language's text, tick **TRANSLATION NEEDED** on that episode. Visitors see a yellow notice on that language's page, and the build prints a reminder. Untick it when the translation is in. Currently flagged: episodes 5, 7 and 8 (French) and episode 6 (English).
+
+## Accounts (who owns what)
+| What | Where | Notes |
+|---|---|---|
+| Domain `canadianinvestigativejournalism.ca` | Squarespace (registrar; DNS moves to Cloudflare) | Renew yearly. Do not transfer or delete. |
+| Hosting and DNS | Cloudflare (free plan) | Worker `how-they-did-it`, builds from GitHub on every change. |
+| Code and content | GitHub `sebazistan/How-They-Did-It` | Every change is saved here. It is also the backup. |
+| Browser editor | Keystatic Cloud, project `huzzah/how-they-did-it` | Free for up to 3 users. No roles: invited users can edit everything. |
+| Contact form | Web3Forms (not set up yet) | Key goes in `src/i18n/ui.ts`. |
+| Old site | Webflow | Keep the plan until the new site has been live a few days, then cancel. Export form submissions first. |
+
+Turn on two-step verification for Squarespace, Cloudflare, GitHub and Keystatic Cloud.
+
+## Safety check messages
+`npm run build` stops, and the live site stays on its last good version, when an episode is missing a title, summary, date or cover image, when a cover photo file is missing, or when a SoundCloud link does not start with `https://w.soundcloud.com/player/`. The message names the episode and the problem. Notes about translations are warnings and do not stop the build.
